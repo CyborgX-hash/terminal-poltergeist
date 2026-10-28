@@ -1,0 +1,26 @@
+{
+  "name": "terminal-poltergeist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Terminal Poltergeist - AI-powered shell command analysis and safety assistant for Hacktoberfest Week 5",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build:client": "npm run build --prefix client",
+    "test:server": "npm test --prefix server",
+    "test": "npm test --prefix server"
+  },
+  "keywords": [
+    "hacktoberfest",
+    "ghost-in-the-machine",
+    "shell-security",
+    "groq",
+    "gpt-oss-20b",
+    "open-weight",
+    "terminal",
+    "halloween"
+  ],
+  "author": "CyborgX-hash",
+  "license": "MIT"
+}
