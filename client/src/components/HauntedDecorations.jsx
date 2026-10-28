@@ -105,62 +105,6 @@ export function HauntedDecorations() {
           </svg>
         </div>
       </div>
-
-      {/* Floating Ghost 1 (Left to Right wandering spirit) */}
-      <div className="absolute top-1/4 -left-16 animate-ghost-drift-1 pointer-events-none opacity-45 hover:opacity-80 transition-opacity">
-        <GhostSprite scale="w-12 h-12 sm:w-16 sm:h-16" glowColor="rgba(59,130,246,0.6)" eyeColor="#bef264" />
-      </div>
-
-      {/* Floating Ghost 2 (Right floating spirit, bobbing) */}
-      <div className="absolute top-2/3 -right-14 animate-ghost-drift-2 pointer-events-none opacity-40 hover:opacity-75 transition-opacity">
-        <GhostSprite scale="w-14 h-14 sm:w-20 sm:h-20" glowColor="rgba(163,230,53,0.5)" eyeColor="#60a5fa" />
-      </div>
-
-      {/* Floating Ghost 3 (Upper center floating tiny wisp) */}
-      <div className="absolute top-36 left-1/4 animate-ghost-float-wisp pointer-events-none opacity-30">
-        <GhostSprite scale="w-8 h-8 sm:w-10 sm:h-10" glowColor="rgba(59,130,246,0.5)" eyeColor="#bef264" />
-      </div>
-    </div>
-  );
-}
-
-// Reusable Atmospheric Ghost Sprite
-function GhostSprite({ scale, glowColor, eyeColor }) {
-  return (
-    <div className={`relative ${scale}`}>
-      <svg
-        viewBox="0 0 100 100"
-        className="w-full h-full"
-        style={{ filter: `drop-shadow(0 0 15px ${glowColor})` }}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M50 12 C30 12 18 28 18 52 C18 68 15 80 22 80 C29 80 32 72 38 72 C44 72 47 80 54 80 C61 80 64 72 70 72 C76 72 79 80 84 80 C89 80 86 68 86 52 C86 28 70 12 50 12 Z"
-          fill="url(#flyingGhostGrad)"
-        />
-        {/* Glowing Eyes */}
-        <ellipse cx="38" cy="40" rx="4" ry="6" fill="#03050a" />
-        <ellipse cx="62" cy="40" rx="4" ry="6" fill="#03050a" />
-        <circle cx="39" cy="38" r="2" fill={eyeColor} className="animate-pulse" />
-        <circle cx="63" cy="38" r="2" fill={eyeColor} className="animate-pulse" />
-
-        {/* Ghost Ominous Smile */}
-        <path
-          d="M42 54 Q50 62 58 54"
-          stroke="#03050a"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-
-        <defs>
-          <linearGradient id="flyingGhostGrad" x1="18" y1="12" x2="86" y2="80" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#f0fdf4" stopOpacity="0.85" />
-            <stop offset="45%" stopColor="#93c5fd" stopOpacity="0.65" />
-            <stop offset="100%" stopColor="#2563eb" stopOpacity="0.25" />
-          </linearGradient>
-        </defs>
-      </svg>
     </div>
   );
 }
