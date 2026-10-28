@@ -27,29 +27,29 @@ export function AnalysisResults({ result }) {
   // Accessibility & Visual styles based on risk severity
   const riskConfig = {
     Critical: {
-      badgeBg: 'bg-red-950/80 border-red-500/60 text-red-200',
-      glow: 'shadow-[0_0_25px_rgba(239,68,68,0.3)]',
+      badgeBg: 'bg-rose-950/80 border-rose-500/70 text-rose-100',
+      glow: 'shadow-[0_0_25px_rgba(244,63,94,0.35)]',
       icon: Skull,
       label: 'CRITICAL HAZARD',
       ariaDesc: 'Critical risk: This command may cause permanent catastrophic data loss or compromise.'
     },
     High: {
-      badgeBg: 'bg-orange-950/80 border-orange-500/60 text-orange-200',
-      glow: 'shadow-[0_0_20px_rgba(249,115,22,0.25)]',
+      badgeBg: 'bg-orange-950/80 border-orange-500/70 text-orange-100',
+      glow: 'shadow-[0_0_20px_rgba(249,115,22,0.3)]',
       icon: AlertTriangle,
       label: 'HIGH RISK',
       ariaDesc: 'High risk: Potentially dangerous permission change or unverified remote execution.'
     },
     Medium: {
-      badgeBg: 'bg-amber-950/80 border-amber-500/60 text-amber-200',
-      glow: 'shadow-[0_0_20px_rgba(245,158,11,0.2)]',
+      badgeBg: 'bg-amber-950/80 border-amber-500/70 text-amber-100',
+      glow: 'shadow-[0_0_20px_rgba(245,158,11,0.25)]',
       icon: AlertTriangle,
       label: 'MEDIUM CAUTION',
       ariaDesc: 'Medium risk: Command modifies state or introduces potential credential/env leaks.'
     },
     Low: {
-      badgeBg: 'bg-emerald-950/80 border-emerald-500/60 text-emerald-200',
-      glow: 'shadow-[0_0_20px_rgba(16,185,129,0.2)]',
+      badgeBg: 'bg-[#041a09]/90 border-lime-400/60 text-lime-200',
+      glow: 'shadow-[0_0_25px_rgba(163,230,53,0.3)]',
       icon: ShieldCheck,
       label: 'LOW RISK / NORMAL',
       ariaDesc: 'Low risk: Standard shell execution without evident destructive flags.'
@@ -82,10 +82,10 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-6">
       {/* Header Banner: Risk Badge & Summary */}
-      <div className={`p-6 rounded-2xl border bg-[#0d121d] ${currentRisk.badgeBg} ${currentRisk.glow} transition-all`}>
+      <div className={`p-6 rounded-2xl border bg-[#060a14] ${currentRisk.badgeBg} ${currentRisk.glow} transition-all`}>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
           <div className="flex items-center space-x-3">
-            <div className="p-2.5 rounded-xl bg-black/40 border border-white/20">
+            <div className="p-2.5 rounded-xl bg-black/50 border border-white/20">
               <RiskIcon className="w-6 h-6 animate-pulse" />
             </div>
             <div>
@@ -93,11 +93,11 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
                 <span className="text-xs uppercase tracking-widest font-mono font-bold">
                   {currentRisk.label}
                 </span>
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-black/40 font-mono text-slate-300">
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-black/50 font-mono text-slate-200">
                   {riskLevel} Severity
                 </span>
                 {isDeterministicOnly && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-950/80 border border-purple-500/40 font-mono text-purple-300">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-950/80 border border-blue-400/50 font-mono text-blue-300">
                     Offline Rule Engine
                   </span>
                 )}
@@ -111,9 +111,9 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
           <div className="flex items-center space-x-2">
             <button
               onClick={handleCopyReport}
-              className="px-3 py-1.5 rounded-lg bg-black/40 hover:bg-black/60 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center space-x-1.5"
+              className="px-3 py-1.5 rounded-lg bg-black/40 hover:bg-black/70 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center space-x-1.5"
             >
-              {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              {copiedReport ? <Check className="w-3.5 h-3.5 text-lime-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copiedReport ? 'Copied Report' : 'Copy Report'}</span>
             </button>
           </div>
@@ -129,17 +129,17 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
       </div>
 
       {/* Spooky Ghost Commentary Card */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-[#0d121d] to-emerald-950/30 border border-purple-500/30 relative overflow-hidden">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-950/50 via-[#060a14] to-lime-950/40 border border-blue-500/40 relative overflow-hidden shadow-[0_0_20px_rgba(37,99,235,0.2)]">
         <div className="flex items-start space-x-3.5">
-          <div className="w-9 h-9 rounded-xl bg-purple-900/60 border border-purple-500/40 flex items-center justify-center text-purple-300 shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-blue-900/60 border border-blue-400/50 flex items-center justify-center text-lime-400 shrink-0">
             <Ghost className="w-5 h-5 animate-spectral-float" />
           </div>
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-semibold flex items-center space-x-1.5 mb-1">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-lime-400 font-semibold flex items-center space-x-1.5 mb-1">
               <span>Whisper from the Poltergeist</span>
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
             </h4>
-            <p className="text-sm text-purple-200 italic font-mono leading-relaxed">
+            <p className="text-sm text-slate-200 italic font-mono leading-relaxed">
               "{ghostCommentary}"
             </p>
           </div>
@@ -149,9 +149,9 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
       {/* Main Grid: Breakdown & Consequences */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Component Breakdown */}
-        <div className="p-5 rounded-2xl bg-[#0e121b] border border-[#232d42] flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#060a14] border border-[#15223c] flex flex-col justify-between">
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5 mb-3">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-lime-400 flex items-center space-x-1.5 mb-3">
               <Terminal className="w-4 h-4" />
               <span>Component Breakdown</span>
             </h4>
@@ -159,13 +159,13 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
             {components.length > 0 ? (
               <div className="space-y-2.5">
                 {components.map((comp, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-[#131826] border border-[#1e2638]">
+                  <div key={idx} className="p-3 rounded-xl bg-[#090f1e] border border-[#15223c]">
                     <div className="flex items-center justify-between mb-1">
-                      <code className="text-xs font-mono text-emerald-300 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-900/60">
+                      <code className="text-xs font-mono text-lime-300 bg-[#03050a] px-2 py-0.5 rounded border border-[#1e3256]">
                         {comp.part || comp.token || comp}
                       </code>
                       {comp.type && (
-                        <span className="text-[10px] font-mono text-slate-400 uppercase">
+                        <span className="text-[10px] font-mono text-blue-400 uppercase">
                           {comp.type}
                         </span>
                       )}
@@ -185,9 +185,9 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
         </div>
 
         {/* Potential Consequences & Hazards */}
-        <div className="p-5 rounded-2xl bg-[#0e121b] border border-[#232d42] flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#060a14] border border-[#15223c] flex flex-col justify-between">
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-amber-400 flex items-center space-x-1.5 mb-3">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-blue-400 flex items-center space-x-1.5 mb-3">
               <Zap className="w-4 h-4" />
               <span>Consequences & Side Effects</span>
             </h4>
@@ -196,7 +196,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
               <ul className="space-y-2">
                 {consequences.map((cons, idx) => (
                   <li key={idx} className="text-xs text-slate-300 flex items-start space-x-2">
-                    <span className="text-amber-400 font-bold font-mono mt-0.5">⚠</span>
+                    <span className="text-blue-400 font-bold font-mono mt-0.5">⚠</span>
                     <span className="leading-relaxed">{cons}</span>
                   </li>
                 ))}
@@ -209,7 +209,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
 
             {/* Affected Resources */}
             {affectedResources.length > 0 && (
-              <div className="mt-5 pt-4 border-t border-[#1e2638]">
+              <div className="mt-5 pt-4 border-t border-[#15223c]">
                 <h5 className="text-[11px] font-mono uppercase text-slate-400 mb-2">
                   Targeted / Affected Resources
                 </h5>
@@ -217,7 +217,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
                   {affectedResources.map((res, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 text-xs font-mono rounded bg-slate-800 text-slate-300 border border-slate-700"
+                      className="px-2 py-0.5 text-xs font-mono rounded bg-[#0d162a] text-blue-300 border border-[#1e3256]"
                     >
                       {res}
                     </span>
@@ -232,8 +232,8 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
       {/* Deterministic Rules Matched & AI Reasoning Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Matched Security Rules */}
-        <div className="p-5 rounded-2xl bg-[#0e121b] border border-[#232d42]">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-purple-400 flex items-center space-x-1.5 mb-3">
+        <div className="p-5 rounded-2xl bg-[#060a14] border border-[#15223c]">
+          <h4 className="text-xs font-mono uppercase tracking-wider text-blue-400 flex items-center space-x-1.5 mb-3">
             <Shield className="w-4 h-4" />
             <span>Deterministic Security Rules</span>
           </h4>
@@ -241,13 +241,13 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
           {matchedRules.length > 0 ? (
             <div className="space-y-2.5">
               {matchedRules.map((rule, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20">
+                <div key={idx} className="p-3 rounded-xl bg-blue-950/30 border border-blue-500/30">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-purple-300">
+                    <span className="text-xs font-mono font-bold text-blue-300">
                       {rule.id || rule.name}
                     </span>
                     <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                      rule.severity === 'Critical' ? 'bg-red-950 text-red-300 border border-red-800' :
+                      rule.severity === 'Critical' ? 'bg-rose-950 text-rose-300 border border-rose-800' :
                       rule.severity === 'High' ? 'bg-orange-950 text-orange-300 border border-orange-800' :
                       'bg-slate-800 text-slate-300'
                     }`}>
@@ -258,7 +258,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
                     {rule.description || rule.explanation}
                   </p>
                   {rule.mitigation && (
-                    <p className="text-[11px] text-purple-300/80 font-mono mt-1">
+                    <p className="text-[11px] text-lime-400 font-mono mt-1">
                       → Recommendation: {rule.mitigation}
                     </p>
                   )}
@@ -266,8 +266,8 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
               ))}
             </div>
           ) : (
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-center">
-              <ShieldCheck className="w-6 h-6 text-emerald-400 mx-auto mb-1 opacity-80" />
+            <div className="p-4 rounded-xl bg-[#090f1e] border border-[#15223c] text-center">
+              <ShieldCheck className="w-6 h-6 text-lime-400 mx-auto mb-1 opacity-80" />
               <p className="text-xs text-slate-400 font-mono">
                 No deterministic signatures matched. Standard shell patterns observed.
               </p>
@@ -276,21 +276,21 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
         </div>
 
         {/* AI Model Assessment & Engine Metadata */}
-        <div className="p-5 rounded-2xl bg-[#0e121b] border border-[#232d42]">
+        <div className="p-5 rounded-2xl bg-[#060a14] border border-[#15223c]">
           <h4 className="text-xs font-mono uppercase tracking-wider text-slate-300 flex items-center space-x-1.5 mb-3">
-            <Cpu className="w-4 h-4 text-emerald-400" />
+            <Cpu className="w-4 h-4 text-lime-400" />
             <span>AI Reasoning & Architecture</span>
           </h4>
 
           <div className="space-y-3">
-            <div className="flex items-center justify-between text-xs font-mono bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+            <div className="flex items-center justify-between text-xs font-mono bg-[#090f1e] p-2.5 rounded-lg border border-[#15223c]">
               <span className="text-slate-400">Inference Provider:</span>
-              <span className="text-emerald-300 font-semibold">{modelMetadata.provider || 'Groq LPU'}</span>
+              <span className="text-lime-300 font-semibold">{modelMetadata.provider || 'Groq LPU'}</span>
             </div>
 
-            <div className="flex items-center justify-between text-xs font-mono bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+            <div className="flex items-center justify-between text-xs font-mono bg-[#090f1e] p-2.5 rounded-lg border border-[#15223c]">
               <span className="text-slate-400">Open-Weight Model:</span>
-              <span className="text-purple-300 font-semibold">{modelMetadata.model || 'openai/gpt-oss-20b'}</span>
+              <span className="text-blue-300 font-semibold">{modelMetadata.model || 'openai/gpt-oss-20b'}</span>
             </div>
 
             {reasons.length > 0 && (
@@ -301,7 +301,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
                 <ul className="space-y-1.5">
                   {reasons.map((r, idx) => (
                     <li key={idx} className="text-xs text-slate-300 flex items-start space-x-2">
-                      <span className="text-emerald-400 font-mono">•</span>
+                      <span className="text-lime-400 font-mono">•</span>
                       <span>{r}</span>
                     </li>
                   ))}
@@ -314,30 +314,30 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
 
       {/* Safer Alternatives Box (If available) */}
       {saferAlternative && (
-        <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/30 via-[#0e121b] to-teal-950/20 border border-emerald-500/40">
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-950/40 via-[#060a14] to-lime-950/30 border border-lime-400/50 shadow-[0_0_20px_rgba(163,230,53,0.15)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-300 font-bold flex items-center space-x-1.5">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+            <h4 className="text-xs font-mono uppercase tracking-wider text-lime-300 font-bold flex items-center space-x-1.5">
+              <Sparkles className="w-4 h-4 text-lime-400" />
               <span>Recommended Safer Alternative</span>
             </h4>
             <button
               onClick={handleCopyAlternative}
-              className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-mono font-semibold transition-colors flex items-center space-x-1.5 self-start sm:self-auto"
+              className="px-3 py-1.5 rounded-lg bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-mono font-bold transition-colors flex items-center space-x-1.5 self-start sm:self-auto shadow-[0_0_15px_rgba(163,230,53,0.3)]"
             >
               {copiedAlternative ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copiedAlternative ? 'Copied Alternative!' : 'Copy Alternative'}</span>
             </button>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#07090e] border border-emerald-900/60 font-mono text-emerald-300 text-sm overflow-x-auto">
+          <div className="p-3.5 rounded-xl bg-[#03050a] border border-lime-500/40 font-mono text-lime-300 text-sm overflow-x-auto">
             <code>{saferAlternative}</code>
           </div>
         </div>
       )}
 
       {/* Mandatory Advisory Disclaimer */}
-      <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center flex items-center justify-center space-x-2 text-xs text-slate-500 font-mono">
-        <Info className="w-4 h-4 text-slate-500 shrink-0" />
+      <div className="p-3 rounded-xl bg-[#060a14] border border-[#15223c] text-center flex items-center justify-center space-x-2 text-xs text-slate-400 font-mono">
+        <Info className="w-4 h-4 text-blue-400 shrink-0" />
         <span>
           Advisory notice: This automated evaluation is for developer guidance only. Always verify commands within your environment and backups before execution.
         </span>

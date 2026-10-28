@@ -8,14 +8,19 @@
   }
   
   body {
-    background-color: #07090e;
-    color: #e2e8f0;
+    background-color: #03050a;
+    color: #f1f5f9;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
 
   code, pre, .font-mono {
     font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  }
+
+  ::selection {
+    background-color: #1d4ed8;
+    color: #bef264;
   }
 }
 
@@ -25,47 +30,47 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #03050a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #15223c;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2563eb;
 }
 
 /* Atmospheric CRT & Scanline Effects */
 .terminal-screen {
   position: relative;
-  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.05) 0%, rgba(7, 9, 14, 0.95) 75%);
+  background: radial-gradient(circle at 50% 15%, rgba(37, 99, 235, 0.08) 0%, rgba(3, 5, 10, 0.98) 75%);
 }
 
 .scanlines {
   background: linear-gradient(
     rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
+    rgba(0, 0, 0, 0.3) 50%
   ), linear-gradient(
     90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
+    rgba(37, 99, 235, 0.03),
+    rgba(163, 230, 53, 0.02),
+    rgba(37, 99, 235, 0.03)
   );
   background-size: 100% 3px, 6px 100%;
   pointer-events: none;
 }
 
-/* Ghost Ambient Glow */
-.ghost-glow-emerald {
-  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3), 0 0 10px -2px rgba(16, 185, 129, 0.2);
+/* Ghost Ambient Glows */
+.ghost-glow-acid {
+  box-shadow: 0 0 25px -5px rgba(163, 230, 53, 0.4), 0 0 10px -2px rgba(163, 230, 53, 0.25);
 }
 
-.ghost-glow-purple {
-  box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.35), 0 0 10px -2px rgba(139, 92, 246, 0.2);
+.ghost-glow-cobalt {
+  box-shadow: 0 0 25px -5px rgba(37, 99, 235, 0.45), 0 0 12px -2px rgba(37, 99, 235, 0.3);
 }
 
 .ghost-glow-danger {
-  box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.4), 0 0 10px -2px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 0 25px -5px rgba(244, 63, 94, 0.45), 0 0 10px -2px rgba(244, 63, 94, 0.25);
 }
 
 /* Ghost Ambient Fog */
@@ -74,8 +79,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 400px;
-  background: radial-gradient(ellipse at 50% -20%, rgba(139, 92, 246, 0.15) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 80%);
+  height: 440px;
+  background: radial-gradient(ellipse at 50% -20%, rgba(37, 99, 235, 0.25) 0%, rgba(163, 230, 53, 0.12) 45%, transparent 80%);
   pointer-events: none;
 }
 
@@ -98,12 +103,12 @@
 
 @keyframes spectralPulse {
   0%, 100% {
-    opacity: 0.85;
-    filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4));
+    opacity: 0.9;
+    filter: drop-shadow(0 0 14px rgba(163, 230, 53, 0.5));
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 24px rgba(139, 92, 246, 0.6));
+    filter: drop-shadow(0 0 26px rgba(37, 99, 235, 0.7));
   }
 }
 

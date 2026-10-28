@@ -6,8 +6,8 @@ export function AboutSection() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
       {/* Title & Introduction */}
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-purple-300 text-xs font-mono">
-          <Flame className="w-3.5 h-3.5 text-orange-400" />
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#060a14] border border-blue-500/40 text-blue-300 text-xs font-mono">
+          <Flame className="w-3.5 h-3.5 text-lime-400" />
           <span>Hacktoberfest 2026 • Week 5: Ghost in the Machine</span>
         </div>
         <h2 className="text-3xl font-extrabold font-mono text-white">
@@ -21,65 +21,65 @@ export function AboutSection() {
       {/* Grid of Key Architecture Principles */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Open-Weight AI Foundation */}
-        <div className="p-6 rounded-2xl bg-[#0e121b] border border-[#232d42] space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400">
+        <div className="p-6 rounded-2xl bg-[#060a14] border border-[#15223c] space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
+          <div className="w-10 h-10 rounded-xl bg-blue-950/80 border border-blue-500/40 flex items-center justify-center text-blue-400">
             <Cpu className="w-5 h-5" />
           </div>
           <h3 className="text-base font-bold text-white font-mono">1. Open-Weight Model Foundation</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            We use <span className="text-purple-300 font-mono font-semibold">openai/gpt-oss-20b</span> via Groq's high-speed LPU inference engine. 
+            We use <span className="text-blue-300 font-mono font-semibold">openai/gpt-oss-20b</span> via Groq's high-speed LPU inference engine. 
             Open-weight models provide inspectable weight architectures, community-verifiable reasoning, and independence from proprietary model vendor lock-in.
           </p>
-          <div className="pt-2 border-t border-[#1e2638] space-y-1.5 text-xs text-slate-400 font-mono">
+          <div className="pt-2 border-t border-[#15223c] space-y-1.5 text-xs text-slate-400 font-mono">
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-lime-400" />
               <span>Model: <code className="text-slate-200">openai/gpt-oss-20b</code></span>
             </div>
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-lime-400" />
               <span>Provider: Groq Cloud API (Hosted LPU)</span>
             </div>
           </div>
         </div>
 
         {/* Deterministic Rule Complement */}
-        <div className="p-6 rounded-2xl bg-[#0e121b] border border-[#232d42] space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+        <div className="p-6 rounded-2xl bg-[#060a14] border border-[#15223c] space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
+          <div className="w-10 h-10 rounded-xl bg-lime-950/80 border border-lime-500/40 flex items-center justify-center text-lime-400">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <h3 className="text-base font-bold text-white font-mono">2. Dual Defense: Rules + AI</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
             AI models can occasionally hallucinate or miss subtle syntax tricks. 
-            Terminal Poltergeist pairs the AI with a <span className="text-emerald-300 font-mono font-semibold">deterministic security engine</span> that parses flags, subshells, fork bombs, and dangerous piping with 100% mathematical consistency.
+            Terminal Poltergeist pairs the AI with a <span className="text-lime-300 font-mono font-semibold">deterministic security engine</span> that parses flags, subshells, fork bombs, and dangerous piping with 100% mathematical consistency.
           </p>
-          <div className="pt-2 border-t border-[#1e2638] space-y-1.5 text-xs text-slate-400 font-mono">
+          <div className="pt-2 border-t border-[#15223c] space-y-1.5 text-xs text-slate-400 font-mono">
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               <span>Zero-hallucination detection of root wipes & fork bombs</span>
             </div>
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               <span>Independent offline fallback when AI provider is down</span>
             </div>
           </div>
         </div>
 
         {/* Replaceable Model Architecture */}
-        <div className="p-6 rounded-2xl bg-[#0e121b] border border-[#232d42] space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-amber-950/60 border border-amber-500/30 flex items-center justify-center text-amber-400">
+        <div className="p-6 rounded-2xl bg-[#060a14] border border-[#15223c] space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
+          <div className="w-10 h-10 rounded-xl bg-blue-950/80 border border-blue-500/40 flex items-center justify-center text-blue-300">
             <RefreshCw className="w-5 h-5" />
           </div>
           <h3 className="text-base font-bold text-white font-mono">3. Modular Provider Swap</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
             The backend AI service conforms to standard OpenAI-compatible completions format. 
-            By changing environment variables (<code className="text-amber-300">GROQ_API_KEY</code>, <code className="text-amber-300">AI_BASE_URL</code>), 
-            the application can effortlessly switch to self-hosted Ollama, vLLM, or other open-weight models without refactoring a single line of application code.
+            By changing environment variables (<code className="text-lime-300">GROQ_API_KEY</code>, <code className="text-blue-300">AI_BASE_URL</code>), 
+            the application can effortlessly switch to self-hosted Ollama, vLLM, or other open-weight models without refactoring application code.
           </p>
         </div>
 
         {/* Data Privacy & Security Guardrails */}
-        <div className="p-6 rounded-2xl bg-[#0e121b] border border-[#232d42] space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400">
+        <div className="p-6 rounded-2xl bg-[#060a14] border border-[#15223c] space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
+          <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300">
             <Lock className="w-5 h-5" />
           </div>
           <h3 className="text-base font-bold text-white font-mono">4. Zero-Execution & Privacy</h3>
@@ -92,9 +92,9 @@ export function AboutSection() {
       </div>
 
       {/* Honest Technical Disclosures */}
-      <div className="p-6 rounded-2xl bg-[#121724] border border-[#232d42] space-y-3">
+      <div className="p-6 rounded-2xl bg-[#060a14] border border-[#15223c] space-y-3">
         <h4 className="text-xs font-mono uppercase tracking-wider text-slate-300 flex items-center space-x-2">
-          <Info className="w-4 h-4 text-purple-400" />
+          <Info className="w-4 h-4 text-lime-400" />
           <span>Honest Technical Disclosures</span>
         </h4>
         <ul className="space-y-2 text-xs text-slate-400 leading-relaxed font-mono">

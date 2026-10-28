@@ -139,7 +139,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col justify-between selection:bg-purple-900 selection:text-white">
+    <div className="min-h-screen bg-[#03050a] text-slate-100 flex flex-col justify-between selection:bg-blue-600 selection:text-lime-300">
       <div>
         <Navbar 
           activeTab={activeTab} 
