@@ -6,10 +6,11 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "build": "prisma generate && prisma migrate deploy",
+    "build": "prisma generate && prisma db push",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
     "prisma:migrate": "prisma migrate deploy",
     "prisma:migrate:dev": "prisma migrate dev",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
