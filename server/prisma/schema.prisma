@@ -1,0 +1,43 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model CommandAnalysis {
+  id                  String   @id @default(cuid())
+  sessionId           String?  @default("anonymous")
+  command             String
+  riskLevel           String   // Low, Medium, High, Critical
+  summary             String
+  ghostCommentary     String?
+  saferAlternative    String?
+  components          Json?    // Structured breakdown tokens
+  consequences        Json?    // Array of potential side effects
+  affectedResources   Json?    // Array of targeted assets
+  reasons             Json?    // Array of justifications
+  matchedRules        Json?    // Matched deterministic rule IDs & metadata
+  modelMetadata       Json?    // Provider & model info
+  isDeterministicOnly Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([sessionId])
+  @@index([riskLevel])
+  @@index([createdAt])
+}
+
+model SavedExample {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  command     String
+  riskLevel   String
+  description String?
+  createdAt   DateTime @default(now())
+
+  @@index([riskLevel])
+}
