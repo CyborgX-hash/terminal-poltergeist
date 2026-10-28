@@ -116,6 +116,80 @@
   animation: spectralPulse 3s ease-in-out infinite;
 }
 
+/* Spider Sway Animations */
+@keyframes spiderSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+}
+.animate-spider-sway {
+  animation: spiderSway 4s ease-in-out infinite;
+}
+.animate-spider-sway-slow {
+  animation: spiderSway 5.5s ease-in-out infinite reverse;
+}
+
+/* Flying Ghosts Drifting Keyframes */
+@keyframes ghostDrift1 {
+  0% {
+    transform: translate(0, 0) scale(0.9);
+  }
+  25% {
+    transform: translate(25vw, 15px) scale(1.05);
+  }
+  50% {
+    transform: translate(55vw, -20px) scale(0.95);
+  }
+  75% {
+    transform: translate(80vw, 10px) scale(1.02);
+  }
+  100% {
+    transform: translate(110vw, 0) scale(0.9);
+  }
+}
+.animate-ghost-drift-1 {
+  animation: ghostDrift1 22s linear infinite;
+}
+
+@keyframes ghostDrift2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-30vw, -30px) scale(0.92);
+  }
+  50% {
+    transform: translate(-60vw, 15px) scale(1.05);
+  }
+  75% {
+    transform: translate(-85vw, -15px) scale(0.95);
+  }
+  100% {
+    transform: translate(-115vw, 0) scale(1);
+  }
+}
+.animate-ghost-drift-2 {
+  animation: ghostDrift2 26s linear infinite;
+}
+
+@keyframes ghostFloatWisp {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-24px) translateX(12px) rotate(3deg);
+  }
+}
+.animate-ghost-float-wisp {
+  animation: ghostFloatWisp 6s ease-in-out infinite;
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -124,7 +198,14 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .animate-spectral-float, .animate-spectral-pulse, .scanlines {
+  .animate-spectral-float, 
+  .animate-spectral-pulse, 
+  .scanlines,
+  .animate-spider-sway,
+  .animate-spider-sway-slow,
+  .animate-ghost-drift-1,
+  .animate-ghost-drift-2,
+  .animate-ghost-float-wisp {
     animation: none !important;
   }
 }

@@ -6,6 +6,7 @@ import { AnalysisResults } from './components/AnalysisResults';
 import { HistoryDashboard } from './components/HistoryDashboard';
 import { AboutSection } from './components/AboutSection';
 import { Footer } from './components/Footer';
+import { HauntedDecorations } from './components/HauntedDecorations';
 import { api } from './services/api';
 import { AlertCircle, X, Sparkles } from 'lucide-react';
 
@@ -139,7 +140,8 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#03050a] text-slate-100 flex flex-col justify-between selection:bg-blue-600 selection:text-lime-300">
+    <div className="min-h-screen bg-[#03050a] text-slate-100 flex flex-col justify-between selection:bg-blue-600 selection:text-lime-300 relative">
+      <HauntedDecorations />
       <div>
         <Navbar 
           activeTab={activeTab} 
