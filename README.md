@@ -1,4 +1,4 @@
-# 👻 Terminal Poltergeist
+#  Terminal Poltergeist
 
 > *"Every command has consequences. Let the ghost reveal them."*
 
