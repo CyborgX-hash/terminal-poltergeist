@@ -70,9 +70,13 @@ export function CommandTerminal({ command, setCommand, onAnalyze, loading, termi
             if (demo.riskLevel === 'Critical') {
               badgeBg = 'bg-rose-950/40 border-rose-900/60 text-rose-300 hover:border-rose-500/80 hover:bg-rose-950/60';
             } else if (demo.riskLevel === 'High') {
+              badgeBg = 'bg-orange-950/40 border-orange-900/60 text-orange-300 hover:border-orange-500/80 hover:bg-orange-950/60';
+            } else if (demo.riskLevel === 'Medium') {
               badgeBg = 'bg-amber-950/40 border-amber-900/60 text-amber-300 hover:border-amber-500/80 hover:bg-amber-950/60';
             } else if (demo.riskLevel === 'Low') {
               badgeBg = 'bg-lime-950/40 border-lime-900/60 text-lime-300 hover:border-lime-500/80 hover:bg-lime-950/60';
+            } else if (demo.riskLevel === 'Phantom' || demo.riskLevel === 'Invalid') {
+              badgeBg = 'bg-purple-950/40 border-purple-900/60 text-purple-300 hover:border-purple-500/80 hover:bg-purple-950/60';
             }
 
             return (

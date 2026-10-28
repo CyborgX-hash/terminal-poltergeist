@@ -73,4 +73,51 @@ describe('Deterministic Shell Command Security Engine', () => {
       expect(res.components.length).toBe(1);
     });
   });
+
+  describe('Phantom / Non-Existent Command Detection', () => {
+    test('flags completely fake binary as unrecognized', () => {
+      const res = evaluateSecurityRules('foobar123 --deploy-all /production');
+      expect(res.isUnrecognized).toBe(true);
+      expect(res.unrecognizedBinaries).toContain('foobar123');
+      expect(res.riskLevel).toBe('Low');
+      expect(res.summary).toMatch(/does not correspond|command not found|non-existent/i);
+    });
+
+    test('evaluates non-existent command "hii" as unrecognized with Low risk (not Medium)', () => {
+      const res = evaluateSecurityRules('hii');
+      expect(res.isUnrecognized).toBe(true);
+      expect(res.unrecognizedBinaries).toContain('hii');
+      expect(res.riskLevel).toBe('Low');
+      expect(res.riskLevel).not.toBe('Medium');
+    });
+
+    test('flags common typo "gti" and suggests "git"', () => {
+      const res = evaluateSecurityRules('gti commit -m "fix"');
+      expect(res.isUnrecognized).toBe(true);
+      expect(res.unrecognizedBinaries).toContain('gti');
+      expect(res.saferAlternative).toMatch(/git/);
+    });
+
+    test('flags random keyboard mash as unrecognized', () => {
+      const res = evaluateSecurityRules('asdfgh --something');
+      expect(res.isUnrecognized).toBe(true);
+      expect(res.unrecognizedBinaries).toContain('asdfgh');
+    });
+
+    test('does NOT flag recognized standard commands as unrecognized', () => {
+      const res = evaluateSecurityRules('ls -la /home');
+      expect(res.isUnrecognized).toBe(false);
+      expect(res.unrecognizedBinaries.length).toBe(0);
+    });
+
+    test('allows relative path scripts like ./deploy.sh', () => {
+      const res = evaluateSecurityRules('./deploy.sh --env production');
+      expect(res.isUnrecognized).toBe(false);
+    });
+
+    test('allows variable assignments like FOO=bar', () => {
+      const res = evaluateSecurityRules('NODE_ENV=production node server.js');
+      expect(res.isUnrecognized).toBe(false);
+    });
+  });
 });

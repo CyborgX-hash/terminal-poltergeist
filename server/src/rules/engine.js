@@ -1,5 +1,6 @@
 import { parseShellCommand } from './parser.js';
 import { SECURITY_RULES } from './definitions.js';
+import { isRecognizedCommand, getTypoSuggestion } from './knownCommands.js';
 
 const SEVERITY_RANKS = {
   Critical: 4,
@@ -47,6 +48,8 @@ export function evaluateSecurityRules(rawCommand) {
       saferAlternative: null,
       ghostCommentary: 'The ghost squints into the fog, unable to read the runes you offered.',
       isDeterministicOnly: true,
+      isUnrecognized: false,
+      unrecognizedBinaries: [],
     };
   }
 
@@ -56,6 +59,27 @@ export function evaluateSecurityRules(rawCommand) {
   const reasons = [];
   let highestSeverity = 'Low';
   let recommendedAlternative = null;
+
+  // Check for non-existent / unrecognized binaries
+  const unrecognizedBinaries = [];
+  let suggestedTypoFix = null;
+
+  for (const seg of parsed.segments) {
+    if (!seg.binary) continue;
+    let target = seg.binary;
+    if ((target === 'sudo' || target === 'doas') && seg.args[0]) {
+      target = seg.args[0];
+    }
+    if (!isRecognizedCommand(target)) {
+      unrecognizedBinaries.push(target);
+      const typo = getTypoSuggestion(target);
+      if (typo && !suggestedTypoFix) {
+        suggestedTypoFix = parsed.raw.replace(new RegExp(`\\b${target}\\b`), typo);
+      }
+    }
+  }
+
+  const isUnrecognized = unrecognizedBinaries.length > 0;
 
   for (const rule of SECURITY_RULES) {
     try {
@@ -89,7 +113,7 @@ export function evaluateSecurityRules(rawCommand) {
   }
 
   // Tokenize components
-  const components = parsed.segments.map((seg, idx) => {
+  const components = parsed.segments.map((seg) => {
     let explanation = `Executes '${seg.binary || 'command'}' with ${seg.flags.length} flag(s) and ${seg.args.length} argument(s).`;
     if (seg.binary === 'sudo') {
       explanation = 'Executes child command with administrative superuser (root) privileges.';
@@ -101,6 +125,8 @@ export function evaluateSecurityRules(rawCommand) {
       explanation = 'Modifies POSIX filesystem read/write/execute permission bits.';
     } else if (seg.binary === 'dd') {
       explanation = 'Low-level block converter/copier reading and writing raw byte streams.';
+    } else if (!isRecognizedCommand(seg.binary)) {
+      explanation = `Warning: '${seg.binary}' is not recognized as a standard shell utility. Will fail with 'command not found'.`;
     }
 
     return {
@@ -112,18 +138,27 @@ export function evaluateSecurityRules(rawCommand) {
     };
   });
 
+  if (isUnrecognized && !recommendedAlternative && suggestedTypoFix) {
+    recommendedAlternative = suggestedTypoFix;
+  }
+
   // Pick random commentary for risk level
   const commentaries = SPOOKY_COMMENTARIES[highestSeverity] || SPOOKY_COMMENTARIES.Low;
-  const ghostCommentary = commentaries[Math.floor(Math.random() * commentaries.length)];
+  let ghostCommentary = commentaries[Math.floor(Math.random() * commentaries.length)];
 
   // Summary
   let summary = 'Standard shell command with no hazardous signatures identified.';
-  if (highestSeverity === 'Critical') {
+  if (isUnrecognized && highestSeverity !== 'Critical' && highestSeverity !== 'High') {
+    summary = `Unrecognized / Non-Existent Command: '${unrecognizedBinaries.join("', '")}' does not correspond to any standard Unix utility or recognized CLI program. Executing this will result in "command not found".`;
+    consequences.add(`Command execution failure: The shell will exit with status 127 ('command not found: ${unrecognizedBinaries[0]}').`);
+    affectedResources.add('Shell Execution Environment ($PATH)');
+    ghostCommentary = `You chant runes to phantoms that do not walk this mortal machine! The shell will answer only with 'command not found: ${unrecognizedBinaries[0]}'.`;
+  } else if (highestSeverity === 'Critical') {
     summary = 'Critical security hazard detected! This operation poses severe risk of system destruction, data loss, or denial of service.';
   } else if (highestSeverity === 'High') {
     summary = 'High security risk detected: Involves privileged operations, unverified remote execution, or wide permissions.';
   } else if (highestSeverity === 'Medium') {
-    summary = 'Caution advised: Command contains sensitive credential patterns or potentially disruptive flags.';
+    summary = 'Caution advised: Command contains sensitive credential patterns or unrecognized utility flags.';
   }
 
   return {
@@ -139,6 +174,8 @@ export function evaluateSecurityRules(rawCommand) {
     saferAlternative: recommendedAlternative,
     ghostCommentary,
     isDeterministicOnly: true,
+    isUnrecognized,
+    unrecognizedBinaries,
     modelMetadata: {
       provider: 'Deterministic Rule Engine',
       model: 'Static Analyzer v1.0',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ShieldAlert, ShieldCheck, AlertTriangle, Skull, 
-  Copy, Check, FileCode, Cpu, Terminal, Zap, Shield, Sparkles, Ghost, Info
+  Copy, Check, FileCode, Cpu, Terminal, Zap, Shield, Sparkles, Ghost, Info, HelpCircle
 } from 'lucide-react';
 
 export function AnalysisResults({ result }) {
@@ -21,8 +21,12 @@ export function AnalysisResults({ result }) {
     ghostCommentary = 'The ghost watches in eerie silence...',
     matchedRules = [],
     modelMetadata = { provider: 'Groq', model: 'openai/gpt-oss-20b' },
-    isDeterministicOnly = false
+    isDeterministicOnly = false,
+    isUnrecognized = false,
+    unrecognizedBinaries = []
   } = result;
+
+  const isPhantom = Boolean(isUnrecognized && riskLevel !== 'Critical' && riskLevel !== 'High');
 
   // Accessibility & Visual styles based on risk severity
   const riskConfig = {
@@ -53,10 +57,17 @@ export function AnalysisResults({ result }) {
       icon: ShieldCheck,
       label: 'LOW RISK / NORMAL',
       ariaDesc: 'Low risk: Standard shell execution without evident destructive flags.'
+    },
+    Phantom: {
+      badgeBg: 'bg-purple-950/80 border-purple-500/70 text-purple-100',
+      glow: 'shadow-[0_0_25px_rgba(168,85,247,0.3)]',
+      icon: HelpCircle,
+      label: 'COMMAND NOT FOUND',
+      ariaDesc: 'Invalid command: Binary does not exist in standard Unix/Linux/macOS environments (exit code 127).'
     }
   };
 
-  const currentRisk = riskConfig[riskLevel] || riskConfig.Low;
+  const currentRisk = isPhantom ? riskConfig.Phantom : (riskConfig[riskLevel] || riskConfig.Low);
   const RiskIcon = currentRisk.icon;
 
   const handleCopyAlternative = () => {
@@ -69,7 +80,7 @@ export function AnalysisResults({ result }) {
   const handleCopyReport = () => {
     const reportText = `[Terminal Poltergeist Analysis]
 Command: ${result.command || 'N/A'}
-Risk Level: ${riskLevel}
+Risk Level: ${isPhantom ? 'Command Not Found (Exit Code 127)' : riskLevel}
 Summary: ${summary}
 Ghost Commentary: "${ghostCommentary}"
 Matched Rules: ${matchedRules.map(r => r.name || r.id).join(', ') || 'None'}
@@ -94,7 +105,7 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
                   {currentRisk.label}
                 </span>
                 <span className="text-[11px] px-2 py-0.5 rounded-full bg-black/50 font-mono text-slate-200">
-                  {riskLevel} Severity
+                  {isPhantom ? 'Exit Code 127' : `${riskLevel} Severity`}
                 </span>
                 {isDeterministicOnly && (
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-950/80 border border-blue-400/50 font-mono text-blue-300">
@@ -125,8 +136,58 @@ Safer Alternative: ${saferAlternative || 'None necessary'}`;
           <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed">
             {summary}
           </p>
+
+          {isPhantom && unrecognizedBinaries.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-purple-500/20">
+              <span className="text-xs font-mono text-purple-300">Unrecognized binary:</span>
+              {unrecognizedBinaries.map((bin, idx) => (
+                <code
+                  key={idx}
+                  className="px-2 py-0.5 text-xs font-mono rounded bg-black/60 text-purple-200 border border-purple-400/40"
+                >
+                  {bin}
+                </code>
+              ))}
+              <span className="text-xs font-mono text-slate-400">
+                (Execution will fail with <span className="text-rose-300">command not found</span>, exit code 127)
+              </span>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* If command is unrecognized BUT also triggered Critical/High hazards, display dedicated warning */}
+      {!isPhantom && isUnrecognized && unrecognizedBinaries.length > 0 && (
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-950/60 via-[#060a14] to-rose-950/40 border border-purple-500/60 relative overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.25)]">
+          <div className="flex items-start space-x-3.5">
+            <div className="w-9 h-9 rounded-xl bg-purple-900/60 border border-purple-400/50 flex items-center justify-center text-purple-300 shrink-0">
+              <HelpCircle className="w-5 h-5 animate-pulse" />
+            </div>
+            <div>
+              <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold flex items-center space-x-1.5 mb-1">
+                <span>⚠ Phantom Command Detected in Pipeline</span>
+              </h4>
+              <p className="text-sm text-slate-200 leading-relaxed">
+                The following {unrecognizedBinaries.length === 1 ? 'binary does' : 'binaries do'} not exist in standard Unix/Linux/macOS environments:
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {unrecognizedBinaries.map((bin, idx) => (
+                  <code
+                    key={idx}
+                    className="px-2.5 py-1 text-xs font-mono rounded-lg bg-purple-950/80 text-purple-200 border border-purple-500/50"
+                  >
+                    {bin}
+                  </code>
+                ))}
+              </div>
+              <p className="text-xs text-slate-400 font-mono mt-2">
+                Execution will fail with <code className="text-rose-300">command not found</code> (exit code 127).
+                {saferAlternative && ' See the recommended alternative below.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Spooky Ghost Commentary Card */}
       <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-950/50 via-[#060a14] to-lime-950/40 border border-blue-500/40 relative overflow-hidden shadow-[0_0_20px_rgba(37,99,235,0.2)]">

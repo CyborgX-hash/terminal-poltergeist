@@ -62,5 +62,21 @@ export const DEMO_COMMANDS = [
     command: 'tar -czvf logs_backup_$(date +%F).tar.gz /var/log/nginx',
     riskLevel: 'Low',
     hint: 'Read-only compression of nginx log files with timestamped target',
+  },
+  {
+    id: 'demo-9',
+    category: 'Phantom Command',
+    label: 'Non-Existent Binary',
+    command: 'foobar123 --deploy-all /production',
+    riskLevel: 'Phantom',
+    hint: 'A completely fake command that does not exist on any system',
+  },
+  {
+    id: 'demo-10',
+    category: 'Typo Detection',
+    label: 'Common Typo (gti)',
+    command: 'gti commit -m "fix: update config"',
+    riskLevel: 'Phantom',
+    hint: 'Typo of "git" — the ghost will suggest the correct command',
   }
 ];

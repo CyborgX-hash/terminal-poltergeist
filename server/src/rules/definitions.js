@@ -2,6 +2,7 @@
  * Deterministic Security Rules Definitions
  * Each rule defines an inspectable signature, severity, category, description, and mitigation.
  */
+import { isRecognizedCommand } from './knownCommands.js';
 
 export const SECURITY_RULES = [
   // 1. Fork Bombs
@@ -214,5 +215,32 @@ export const SECURITY_RULES = [
     consequence: 'Abruptly terminates all user background services, daemon threads, database connections, and session shells.',
     affectedResources: ['Active Daemon Processes', 'Database Connections', 'Background Workers'],
     saferAlternative: 'systemctl stop <service-name> # Or kill specific PID with kill -15 <PID>',
+  },
+
+  // 10. Unrecognized / Non-Existent Command Detection
+  {
+    id: 'RULE-UNRECOGNIZED-COMMAND',
+    name: 'Unrecognized / Non-Existent Command',
+    category: 'Invalid Command Syntax',
+    severity: 'Low',
+    description: 'The specified executable or binary does not exist in standard Unix/POSIX systems or common developer CLI ecosystems.',
+    mitigation: 'Verify spelling, install the required package or CLI tool, or check your system $PATH.',
+    test: (raw, parsed) => {
+      if (!parsed || !parsed.segments || parsed.segments.length === 0) return false;
+      for (const seg of parsed.segments) {
+        if (!seg.binary) continue;
+        let checkBin = seg.binary;
+        if (checkBin === 'sudo' || checkBin === 'doas') {
+          checkBin = seg.args[0] || '';
+        }
+        if (checkBin && !isRecognizedCommand(checkBin)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    consequence: 'Executing this command will fail immediately with "command not found" (exit code 127). It may be a typo, missing dependency, or non-existent script.',
+    affectedResources: ['Shell Command Dispatcher', 'System $PATH'],
+    saferAlternative: null,
   },
 ];
