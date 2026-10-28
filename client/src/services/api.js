@@ -9,7 +9,15 @@ const getSessionId = () => {
   return sessionId;
 };
 
-const API_BASE = '/api';
+const rawApiUrl =
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API ||
+  import.meta.env.Vite_api ||
+  '';
+
+const API_BASE = rawApiUrl
+  ? (rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl.replace(/\/+$/, '')}/api`)
+  : '/api';
 
 export const api = {
   getSessionId,
