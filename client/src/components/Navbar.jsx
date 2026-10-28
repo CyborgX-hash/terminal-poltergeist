@@ -26,11 +26,11 @@ export function Navbar({ activeTab, setActiveTab, backendOnline }) {
                 Terminal<span className="text-blue-500">Poltergeist</span>
               </span>
               <span className="px-1.5 py-0.5 text-[10px] uppercase font-semibold tracking-wider bg-blue-950/80 text-blue-300 border border-blue-700/60 rounded">
-                v1.0 • Hacktoberfest
+                v1.0 • Security Guardian
               </span>
             </div>
             <p className="text-[11px] text-slate-400 hidden sm:block">
-              Ghost in the Machine • Midnight & Electric Cobalt Guardian
+              AI Command Security Assistant & Static Risk Analyzer
             </p>
           </div>
         </div>

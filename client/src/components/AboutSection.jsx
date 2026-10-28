@@ -8,7 +8,7 @@ export function AboutSection() {
       <div className="text-center space-y-3">
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#060a14] border border-blue-500/40 text-blue-300 text-xs font-mono">
           <Flame className="w-3.5 h-3.5 text-lime-400" />
-          <span>Hacktoberfest 2026 • Week 5: Ghost in the Machine</span>
+          <span>Transparent AI & Static Security Architecture</span>
         </div>
         <h2 className="text-3xl font-extrabold font-mono text-white">
           Open Innovation & Architecture

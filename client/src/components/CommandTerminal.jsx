@@ -3,7 +3,7 @@ import { Terminal, Send, Trash2, Copy, Check, Sparkles, Ghost, AlertCircle, Play
 import { DEMO_COMMANDS } from '../data/demoCommands';
 
 const SPOOKY_LOADING_MESSAGES = [
-  "Summoning the ghost in the machine...",
+  "Summoning the spectral security guardian...",
   "Consulting open-weight GPT-OSS 20B...",
   "Parsing shell tokens and subshells...",
   "Auditing against deterministic security rules...",

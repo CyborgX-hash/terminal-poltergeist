@@ -60,10 +60,10 @@ export function GhostHero({ onSummonClick, onExploreDemo }) {
           </div>
         </div>
 
-        {/* Hacktoberfest Badge */}
+        {/* Security Platform Badge */}
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#060a14] border border-blue-500/40 text-blue-300 text-xs font-mono mb-4 backdrop-blur-sm">
           <Flame className="w-3.5 h-3.5 text-lime-400" />
-          <span>Hacktoberfest Week 5: Ghost in the Machine</span>
+          <span>AI Shell Command Safety Guardian</span>
           <span className="text-slate-600">•</span>
           <span className="text-lime-400">Open-Weight GPT-OSS 20B</span>
         </div>

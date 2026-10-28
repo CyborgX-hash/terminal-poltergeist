@@ -8,15 +8,11 @@ export function Footer() {
         <div className="flex items-center space-x-2">
           <Ghost className="w-4 h-4 text-lime-400 animate-spectral-float" />
           <span className="text-slate-400">
-            Terminal Poltergeist © 2026 • Hacktoberfest Week 5 (Ghost in the Machine)
+            Terminal Poltergeist © 2026 • AI Shell Command Safety Assistant
           </span>
         </div>
 
         <div className="flex items-center space-x-4">
-          <span className="text-slate-400">
-            Midnight + Electric Cobalt + Acid Lime Edition
-          </span>
-          <span className="text-slate-700">|</span>
           <span className="text-slate-500">
             Open-Weight <span className="text-blue-400 font-semibold">GPT-OSS 20B</span> on Groq
           </span>
