@@ -6,7 +6,8 @@ const inMemoryStore = [];
 
 function getPrismaClient() {
   if (!prismaInstance) {
-    if (process.env.DATABASE_URL && process.env.DATABASE_URL.startsWith('postgresql://')) {
+    const url = process.env.DATABASE_URL;
+    if (url && (url.startsWith('postgresql://') || url.startsWith('postgres://'))) {
       try {
         prismaInstance = new PrismaClient({
           log: process.env.NODE_ENV === 'development' ? ['warn', 'error'] : ['error'],
